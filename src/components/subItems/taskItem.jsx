@@ -1,19 +1,28 @@
 import '../../styles/index.css';
 
-const TaskItem = () => {
+const TaskItem = ({ task, setPriority }) => {
     return (
-        <li className="task-item low">
+        <li className={`task-item ${task.priority}`}>
             <div className="task-info">
                 <div>
-                    Title <strong>Medium</strong>
+                    {task.title}
                 </div>
                 <div className="task-deadline"> 
-                    Due: {new Date().toISOString()}
+                    Due: {task.deadline?.toISOString()}
                 </div>
             </div>
             <div className="task-buttons">
                 <button className="complete-button">Complete</button>
                 <button className="delete-button">Delete</button>
+                <select 
+                    className="task-priority" 
+                    value={task.priority} 
+                    onChange={(e) => setPriority(e.target.value)}
+                >
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
             </div>
         </li>
     )
